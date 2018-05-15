@@ -79,6 +79,8 @@ $Options = @{
 Update-ApiReference @Options
 ```
 
+## Build HTML
+
 Optionally run a Sphinx build of the html pages using docker:
 ```
 sudo docker run --rm -v "$pwd/docs:/docs" alphakilo/opnsense-sphinx-doc:latest
