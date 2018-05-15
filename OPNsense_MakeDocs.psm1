@@ -48,8 +48,6 @@ ForEach ($Folder in 'Private', 'Public') {
 }
 
 
-return
-
 # Load external data files
 Try {
     # Load objectmap of api calls

@@ -10,8 +10,12 @@ Function Update-ApiReference {
 
     # Model XML for schemas
     $files = Find-ModelFile $CorePath, $PluginPath |
-        Where-Object { $_ -like '*models*' -and $_ -notlike '*tests*' -and $_ -notlike '*net\frr*' } |
-        Where-Object { $_ -notlike "sysutils\monit\src\opnsense\mvc\app\models\OPNsense\Monit\Monit.xml" }       # Duplicate Monit !!
+        Where-Object { 
+        $_ -like '*models*' -and $_ -notlike '*tests*' -and 
+        ($_ -notlike '*net\frr*' -or $_ -notlike '*net/frr*') } |
+        Where-Object {
+        $_ -notlike "sysutils\monit\src\opnsense\mvc\app\models\OPNsense\Monit\Monit.xml" -or
+        $_ -notlike "sysutils/monit/src/opnsense/mvc/app/models/OPNsense/Monit/Monit.xml" }       # Duplicate Monit !!
     $params = Get-ModelParameter $files
     
     # Form XML for descriptions
@@ -19,7 +23,7 @@ Function Update-ApiReference {
     $forms = Get-FormFields $files
 
 
-    $Modules = Get-NoteProperty $OPNsenseObjectMap
+    $Modules = Get-NoteProperty $OPNsenseItemMap
     $Modules += Get-NoteProperty $OPNsenseSettingMap.Settings
     $Modules += Get-NoteProperty $OPNsenseServiceMap.Services
     $Modules = $modules | Group-Object | Select-Object -ExpandProperty Name | Sort-Object   # Unique modules
@@ -77,7 +81,7 @@ Function Update-ApiReference {
         }
 
         # Module has Items
-        if ($OPNsenseObjectMap.$Module) {
+        if ($OPNsenseItemMap.$Module) {
             if ($divider) {
                 $rstdata += "------------------------------`n`n"
             }
@@ -85,21 +89,21 @@ Function Update-ApiReference {
             # Items Header
             $rstdata += Get-RSTtitle 'Resource Items' '='
         
-            foreach ($Object in (Get-NoteProperty $OPNsenseObjectMap.$Module)) {
+            foreach ($Object in (Get-NoteProperty $OPNsenseItemMap.$Module)) {
                 $namespace = "$Module`.$Object"
-                $OPNobject = $OPNsenseObjectMap.$Module.$Object
+                $OPNobject = $OPNsenseItemMap.$Module.$Object
                 #$objectname = $OPNobject.objectname
-                $mount = $OPNsenseObjectMap.$Module.$Object.mountpoint
+                $mount = $OPNsenseItemMap.$Module.$Object.mountpoint
 
                 # Subtitle
                 $rstdata += Get-RSTtitle $Object '-'
-                $rstdata += Get-RSTapis $NameSpace $OPNsenseObjectMap.$Module.$Object #.commands          
+                $rstdata += Get-RSTapis $NameSpace $OPNsenseItemMap.$Module.$Object #.commands          
                 
                 $parameters = $params | Where-Object { $_.mount -eq $mount }  #Get-ModelParameter $modelfile
                 $formfields = $Forms | Where-Object { $_.module -eq $Module -And $_.Object -eq $Object }
                 $rstdata += Get-RSTdefinition $parameters $Mount $formfields '^'
 
-                $rstdata += Get-RSTexample $OPNsenseObjectMap.$Module.$Object '^' $server $key $secret   #.commands
+                $rstdata += Get-RSTexample $OPNsenseItemMap.$Module.$Object '^' $server $key $secret   #.commands
             }
         }
 
