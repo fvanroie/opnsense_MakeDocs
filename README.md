@@ -34,7 +34,7 @@ Start PowerShell Core 6.0.0 or higher:
 ```
 pwsh
 
-PS >
+PS > cd tmp
 ```
 
 Save the script below to build.ps1 while setting the option parameters to the correct settings for your build environment.
@@ -43,6 +43,8 @@ Use a **TEST server** for running the API examples. Changes can be made to the e
 *(like stopping or restarting services...)*
 
 All available plugins should be installed on the test server in the build environment in order to capture all API output.
+
+## Build Script
 
 On Windows: .\build.ps1
 ```
