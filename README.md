@@ -1,4 +1,8 @@
-### Clone the Module:
+## Prerequisites
+
+* PowerShell Core needs to be installed on your system.
+
+### Clone the PowerShell Module:
 
 ```
 cd tmp
@@ -15,11 +19,16 @@ git clone https://github.com/opnsense/docs.git
 ### Usage:
 
 Run this command in PowerShell Core 6.0.0 or higher:
+```
+pwsh
+
+PS >
+```
 
 On Windows:
 ```
 # Module Requires PowerShell Core to run:
-Import-Module opnsense_MakeDocs\OPNsense_MakeDocs.psd1
+Import-Module .\opnsense_MakeDocs\OPNsense_MakeDocs.psd1
 
 $Options = @{
     'Server'     = "https://test-server.local"    # All example API commands are run against this server!
@@ -35,7 +44,7 @@ Update-ApiReference @Options
 
 On Linux:
 ```
-Import-Module opnsense_MakeDocs/OPNsense_MakeDocs.psd1
+Import-Module ./opnsense_MakeDocs/OPNsense_MakeDocs.psd1
 
 $Options = @{
     'Server'     = "https://test-server.local"     # All example API commands are run against this server!
@@ -49,7 +58,9 @@ $Options = @{
 Update-ApiReference @Options
 ```
 
-Optionally add a build of the html pages:
+Optionally add a build of the html pages using docker:
 ```
-docker run --rm -v ~/src/opnsense_docs:/docs alphakilo/opnsense-sphinx-doc:latest
+sudo docker run --rm -v "$pwd/docs:/docs" alphakilo/opnsense-sphinx-doc:latest
+
+ls -laR $pwd/docs/build/html/development/api
 ```
