@@ -1,6 +1,16 @@
+# OPNsenseMakeDocs
+
+This PowerShell Module compiles an API Reference for OPNsense based on the source code.
+The output is written as reStructuredText *(\*.rst)* files that can be compiled into html using Sphinx.
+
 ## Prerequisites
 
-* PowerShell Core needs to be installed on your system.
+You need to have these packages installed on your system:
+* PowerShell Core 6.0 or higher
+* Git
+
+Optional packages:
+* Docker
 
 ### Clone the PowerShell Module:
 
@@ -18,12 +28,16 @@ git clone https://github.com/opnsense/docs.git
 
 ### Usage:
 
-Run this command in PowerShell Core 6.0.0 or higher:
+Start PowerShell Core 6.0.0 or higher:
 ```
 pwsh
 
 PS >
 ```
+
+Set the option parameters to the correct settings for your environment.
+Use a TEST server for running the API examples. Changes can be made to the evironment!
+*(like stopping or restarting services...)*
 
 On Windows:
 ```
