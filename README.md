@@ -18,7 +18,7 @@ Optional packages:
 
 ```
 cd tmp
-git clone https://github.com/fvanroie/opnsense_MakeDocs.git
+git clone https://github.com/fvanroie/opnsense_MakeDocs.git OPNsense_MakeDocs
 ```
 
 ### Clone the OPNsense Core, Plugins and Docs repos:
@@ -37,11 +37,12 @@ pwsh
 PS >
 ```
 
-Set the option parameters in the script below to the correct settings for your environment.
-Use a TEST server for running the API examples. Changes can be made to the evironment!
+Save the script below to build.ps1 while setting the option parameters to the correct settings for your build environment.
+
+Use a **TEST server** for running the API examples. Changes can be made to the evironment while running the build!
 *(like stopping or restarting services...)*
 
-On Windows:
+On Windows: .\build.ps1
 ```
 # This Module Requires PowerShell Core to run:
 Import-Module .\opnsense_MakeDocs\OPNsense_MakeDocs.psd1
@@ -58,7 +59,7 @@ $Options = @{
 Update-ApiReference @Options
 ```
 
-On Linux:
+On Linux: ./build.ps1
 ```
 Import-Module ./opnsense_MakeDocs/OPNsense_MakeDocs.psd1
 
