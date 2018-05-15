@@ -42,6 +42,8 @@ Save the script below to build.ps1 while setting the option parameters to the co
 Use a **TEST server** for running the API examples. Changes can be made to the evironment while running the build!
 *(like stopping or restarting services...)*
 
+All available plugins should be installed on the test server in the build environment in order to capture all API output.
+
 On Windows: .\build.ps1
 ```
 # This Module Requires PowerShell Core to run:
