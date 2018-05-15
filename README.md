@@ -12,6 +12,8 @@ You need to have these packages installed on your system:
 Optional packages:
 * Docker
 
+## Setup
+
 ### Clone the PowerShell Module:
 
 ```
@@ -26,7 +28,7 @@ git clone https://github.com/opnsense/plugins.git
 git clone https://github.com/opnsense/docs.git
 ```
 
-### Usage:
+## Usage:
 
 Start PowerShell Core 6.0.0 or higher:
 ```
@@ -35,13 +37,13 @@ pwsh
 PS >
 ```
 
-Set the option parameters to the correct settings for your environment.
+Set the option parameters in the script below to the correct settings for your environment.
 Use a TEST server for running the API examples. Changes can be made to the evironment!
 *(like stopping or restarting services...)*
 
 On Windows:
 ```
-# Module Requires PowerShell Core to run:
+# This Module Requires PowerShell Core to run:
 Import-Module .\opnsense_MakeDocs\OPNsense_MakeDocs.psd1
 
 $Options = @{
